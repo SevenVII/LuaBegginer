@@ -6,8 +6,6 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-print("hello");
-
 -- defines a factorial function
 function fact(n)
     if n == 0 then
@@ -18,7 +16,5 @@ function fact(n)
 end
 
 print("enter a number:");
-
-a = io.read("*number");   -- read a number
-
-print(fact(a));
+a = io.read("*n");   -- read a number
+print(fact(5));
