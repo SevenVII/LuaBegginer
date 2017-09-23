@@ -4,25 +4,27 @@
 -- VARIABLES --
 
 randomNames={"Harvey", "Collen", "Tim", "Nelia", "Claretha", "Candie", "Golda", "Jestine", "Nancy", "Donte", "Jefferey", "Chloe", "Hans", "Amelia", "Meda", "Beryl", "Keisha", "Marisha", "Liza", "Marva", "Clement", "Isaiah", "Arla", "Jonas", "Loree", "Tommie", "Sharie", "Deb", "Jesse", "Thanh", "Shanta", "Buford", "Tameka", "Beula", "Lucina", "Aileen", "Twanna", "Marybeth", "Cheri", "Jeana", "Antionette", "Kenneth", "Miesha", "Genaro", "Marlana", "Mira", "Bryanna", "Virgie", "Sharilyn", "Marian"}
-players={}
+players={
+  ["names"]={},
+  ["score"]={}
+  }
 
 
 -- FUNCTIONS --
 
-function selectPlayers(numberOfPlayers)
-  print(#randomNames)
-  for i=0,numberOfPlayers-1,1 do
-    players["names"]=randomNames[math.random(#randomNames)]
-    print(players["names"])
-  end  
-end
-
-function printPlayersName()
-  for i=0,#players["names"],1 do
-    print(players["names"])
+function initializePlayersVariable(numberOfPlayers)
+  math.randomseed(os.time())
+  players["names"][1]=selectPlayerName()
+  for j=2,4 do
+    players["names"][j]=randomNames[math.random(#randomNames)]
   end
 end
 
+function printPlayersName()
+  for i=1,#players["names"],1 do
+    print(players["names"][i])
+  end
+end
 
 function isGameFinished()
   
@@ -30,10 +32,18 @@ function isGameFinished()
   
 end
 
+function selectPlayerName()
+  local name=io.read()
+  return name
+end
+
 
 -- MAIN BLOCK PROGRAM --
+
 -- Default number of players: 3
-selectPlayers(3)
+--selectPlayers(3)
+
+initializePlayersVariable(3)
 
 printPlayersName()
 
