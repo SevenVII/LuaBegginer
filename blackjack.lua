@@ -7,8 +7,9 @@ randomNames={"Harvey", "Collen", "Tim", "Nelia", "Claretha", "Candie", "Golda", 
 players={
   ["names"]={},
   ["score"]={}
-  }
-
+}
+-- Max players: 7
+numberOfPlayers=3
 
 -- FUNCTIONS --
 
@@ -33,20 +34,28 @@ function isGameFinished()
 end
 
 function selectPlayerName()
-  local name=io.read()
+  local name=Guillermo
+  --print("Introduce tu nombre: ")
+  --local name=io.read()
   return name
 end
 
 
 -- MAIN BLOCK PROGRAM --
 
--- Default number of players: 3
---selectPlayers(3)
+initializePlayersVariable(numberOfPlayers)
 
-initializePlayersVariable(3)
-
-printPlayersName()
+--printPlayersName()
 
 while isGameFinished()==false do
-  
+  -- Apuestas jugadores
+  bets()
+  -- Se reparten cartas
+  dealCards()
+  -- Turno de los jugadores
+  playersRound()
+  -- Comprobar apuestas de jugadores
+  checkMoves()
+  -- Reparto bote de apuestas perdidas/ganadas/empatadas
+  distributeBetting()
 end
