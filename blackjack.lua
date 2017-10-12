@@ -6,7 +6,8 @@
 randomNames={"Harvey", "Collen", "Tim", "Nelia", "Claretha", "Candie", "Golda", "Jestine", "Nancy", "Donte", "Jefferey", "Chloe", "Hans", "Amelia", "Meda", "Beryl", "Keisha", "Marisha", "Liza", "Marva", "Clement", "Isaiah", "Arla", "Jonas", "Loree", "Tommie", "Sharie", "Deb", "Jesse", "Thanh", "Shanta", "Buford", "Tameka", "Beula", "Lucina", "Aileen", "Twanna", "Marybeth", "Cheri", "Jeana", "Antionette", "Kenneth", "Miesha", "Genaro", "Marlana", "Mira", "Bryanna", "Virgie", "Sharilyn", "Marian"}
 players={
   ["names"]={},
-  ["score"]={}
+  ["score"]={},
+  ["bets"]={}
 }
 cards={
   "A_clubs","2_clubs","3_clubs","4_clubs","5_clubs","6_clubs","7_clubs","8_clubs","9_clubs","10_clubs","J_clubs","Q_clubs","K_clubs",
@@ -17,6 +18,9 @@ cards={
 
 -- Max players: 7
 numberOfPlayers=3
+
+-- Max bet per round
+maxBetPerRound=8
 
 -- FUNCTIONS --
 
@@ -49,7 +53,13 @@ function selectPlayerName()
 end
 
 function bets()
-  
+  print("¡Te toca apostar " .. players["names"][1] .. "!")
+  players["bets"][1]=io.read()
+  for i=2,#players["names"],1 do
+    -- math.random para apostar los bots
+    players["bets"][i]=math.random(maxBetPerRound)
+    print(players["names"][i] .. " apostó " .. players["bets"][i])
+  end
 end
 
 function dealCards()
@@ -74,14 +84,20 @@ end
 initializePlayersVariable(numberOfPlayers)
 
 while isGameFinished()==false do
+  
   -- Apuestas jugadores
   bets()
+  
   -- Se reparten cartas
   dealCards()
+  
   -- Turno de los jugadores
   playersRound()
+  
   -- Comprobar apuestas de jugadores
   checkMoves()
+  
   -- Reparto bote de apuestas perdidas/ganadas/empatadas
   distributeBetting()
+  
 end
